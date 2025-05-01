@@ -140,10 +140,10 @@ int PCAL9535A::pinMode(int Pin, uint8_t PinType)
   }
 
   if(Pin >= 8) {
-    return pinMode(Pin - 8, PinType, B); //Shift pin number, pass along to set port B
+    return pinMode(Pin - 8, PinType, PORT_B); //Shift pin number, pass along to set port B
   }
   if(Pin <= 7) {
-    return pinMode(Pin, PinType, A); //Pass along to set port A
+    return pinMode(Pin, PinType, PORT_A); //Pass along to set port A
   }
   return -1; //Fail is state is ill-defined
 }
@@ -202,10 +202,10 @@ int PCAL9535A::digitalWrite(int Pin, bool State)
   }
 
   if(Pin >= 8) {
-    return digitalWrite(Pin - 8, State, B); //Shift pin number, pass along to set port B
+    return digitalWrite(Pin - 8, State, PORT_B); //Shift pin number, pass along to set port B
   }
   if(Pin <= 7) {
-    return digitalWrite(Pin, State, A); //Pass along to set port A
+    return digitalWrite(Pin, State, PORT_A); //Pass along to set port A
   }
   return -1; //Fail is state is ill-defined
 }
@@ -228,10 +228,10 @@ int PCAL9535A::digitalRead(int Pin)
   }
 
   if(Pin >= 8) {
-    return digitalRead(Pin - 8, B); //Shift pin number, pass along to set port B
+    return digitalRead(Pin - 8, PORT_B); //Shift pin number, pass along to set port B
   }
   if(Pin <= 7) {
-    return digitalRead(Pin, A); //Pass along to set port A
+    return digitalRead(Pin, PORT_A); //Pass along to set port A
   }
   return -1; //Fail is state is ill-defined
 }
@@ -282,10 +282,10 @@ int PCAL9535A::pinSetDriveStrength(int Pin, DriveStrength State)
   }
 
   if(Pin >= 8) {
-    return pinSetDriveStrength(Pin - 8, State, B); //Shift pin number, pass along to set port B
+    return pinSetDriveStrength(Pin - 8, State, PORT_B); //Shift pin number, pass along to set port B
   }
   if(Pin <= 7) {
-    return pinSetDriveStrength(Pin, State, A); //Pass along to set port A
+    return pinSetDriveStrength(Pin, State, PORT_A); //Pass along to set port A
   }
   return -1; //Fail is state is ill-defined
 }
@@ -325,10 +325,10 @@ int PCAL9535A::setInterrupt(int Pin, bool State)
   }
 
   if(Pin >= 8) {
-    return setInterrupt(Pin - 8, State, B); //Shift pin number, pass along to set port B
+    return setInterrupt(Pin - 8, State, PORT_B); //Shift pin number, pass along to set port B
   }
   if(Pin <= 7) {
-    return setInterrupt(Pin, State, A); //Pass along to set port A
+    return setInterrupt(Pin, State, PORT_A); //Pass along to set port A
   }
   return -1; //Fail is state is ill-defined
 }
@@ -370,10 +370,10 @@ int PCAL9535A::setLatch(int Pin, bool State)
   }
 
   if(Pin >= 8) {
-    return setLatch(Pin - 8, State, B); //Shift pin number, pass along to set port B
+    return setLatch(Pin - 8, State, PORT_B); //Shift pin number, pass along to set port B
   }
   if(Pin <= 7) {
-    return setLatch(Pin, State, A); //Pass along to set port A
+    return setLatch(Pin, State, PORT_A); //Pass along to set port A
   }
   return -1; //Fail is state is ill-defined
 }
@@ -568,10 +568,10 @@ int PCAL9535A::setInputPolarity(int Pin, bool State)
   }
 
   if(Pin >= 8) {
-    return setInputPolarity(Pin - 8, State, B); //Shift pin number, pass along to set port B
+    return setInputPolarity(Pin - 8, State, PORT_B); //Shift pin number, pass along to set port B
   }
   if(Pin <= 7) {
-    return setInputPolarity(Pin, State, A); //Pass along to set port A
+    return setInputPolarity(Pin, State, PORT_A); //Pass along to set port A
   }
   return -1; //Fail is state is ill-defined
   // return -1;
@@ -604,10 +604,10 @@ bool PCAL9535A::getInputPolarity(int Pin)
   }
 
   if(Pin >= 8) {
-    return getInputPolarity(Pin - 8, B); //Shift pin number, pass along to set port B
+    return getInputPolarity(Pin - 8, PORT_B); //Shift pin number, pass along to set port B
   }
   if(Pin <= 7) {
-    return getInputPolarity(Pin, A); //Pass along to set port A
+    return getInputPolarity(Pin, PORT_A); //Pass along to set port A
   }
   return -1; //Fail is state is ill-defined
 }
