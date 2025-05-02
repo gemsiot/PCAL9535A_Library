@@ -684,29 +684,29 @@ int PCAL9535A::setIntPinConfig(int Pin, bool Latch)
   if(Pin >= 8) {
     // Control = readByte(INTCONB); //Read in existing control values
     // DefVals = readByte(DEFVALB); //Read in existing default values
-    // InterruptTypeConf[B] = clearBit(InterruptTypeConf[B], Pin - 8); //Clear existing bit
-    // InterruptTypeConf[B] = InterruptTypeConf[B] | ((!OnChange) << (Pin - 8)); //Apply new value
-    // DefaultValConf[B] = clearBit(DefaultValConf[B], Pin - 8); //Clear existing bit
-    // DefaultValConf[B] = DefaultValConf[B] | (DefVal << (Pin - 8)) ; //Apply new value
-    // writeByte(INTCONB, InterruptTypeConf[B]); //Write control value back
-    // return writeByte(DEFVALB, DefaultValConf[B]); //Write default values back
+    // InterruptTypeConf[PORT_B] = clearBit(InterruptTypeConf[PORT_B], Pin - 8); //Clear existing bit
+    // InterruptTypeConf[PORT_B] = InterruptTypeConf[PORT_B] | ((!OnChange) << (Pin - 8)); //Apply new value
+    // DefaultValConf[PORT_B] = clearBit(DefaultValConf[PORT_B], Pin - 8); //Clear existing bit
+    // DefaultValConf[PORT_B] = DefaultValConf[PORT_B] | (DefVal << (Pin - 8)) ; //Apply new value
+    // writeByte(INTCONB, InterruptTypeConf[PORT_B]); //Write control value back
+    // return writeByte(DEFVALB, DefaultValConf[PORT_B]); //Write default values back
     if(systemSafe >= SAFE2) {
       int Error = 0;
       uint8_t CurrentMask = readByte(LATCHB, Error);
-      if(InterruptMask[B] != CurrentMask && Error == 0x00) {
+      if(InterruptMask[PORT_B] != CurrentMask && Error == 0x00) {
         globalError = globalError | MEMORY_ERROR; //Set Read Memory error bit, only if problem was not caused by an I2C error
         return -1;
       }
     }
-    uint8_t TempMask = InterruptMask[B];
-    uint8_t TempLatch = InputLatch[B];
+    uint8_t TempMask = InterruptMask[PORT_B];
+    uint8_t TempLatch = InputLatch[PORT_B];
 
     TempMask = TempMask & ~(0x01 << Pin); //Clear mask bit to enable interrupts on that pin
     TempLatch = TempLatch | (Latch << Pin); //Set the appropriate value for the latch control
     int Error = writeByte(INTMASKB, TempMask); //Write interrupt mask value back
-    if(Error == 0x00) InterruptMask[B] = TempMask; //Write value back if no error on send
+    if(Error == 0x00) InterruptMask[PORT_B] = TempMask; //Write value back if no error on send
     Error = writeByte(LATCHB, TempLatch); //Write latch values back
-    if(Error == 0x00) InputLatch[B] = TempLatch; //Write values back if no error on send 
+    if(Error == 0x00) InputLatch[PORT_B] = TempLatch; //Write values back if no error on send 
   }
   if(Pin <= 7) {
     // Control = readByte(INTCONA); //Read in existing control values
@@ -714,20 +714,20 @@ int PCAL9535A::setIntPinConfig(int Pin, bool Latch)
     if(systemSafe >= SAFE2) {
       int Error = 0;
       uint8_t CurrentMask = readByte(LATCHA, Error);
-      if(InterruptMask[A] != CurrentMask && Error == 0x00) {
+      if(InterruptMask[PORT_A] != CurrentMask && Error == 0x00) {
         globalError = globalError | MEMORY_ERROR; //Set Read Memory error bit, only if problem was not caused by an I2C error
         return -1;
       }
     }
-    uint8_t TempMask = InterruptMask[B];
-    uint8_t TempLatch = InputLatch[B];
+    uint8_t TempMask = InterruptMask[PORT_B];
+    uint8_t TempLatch = InputLatch[PORT_B];
 
     TempMask = TempMask & ~(0x01 << Pin); //Clear mask bit to enable interrupts on that pin
     TempLatch = TempLatch | (Latch << Pin); //Set the appropriate value for the latch control
     int Error = writeByte(INTMASKA, TempMask); //Write interrupt mask value back
-    if(Error == 0x00) InterruptMask[A] = TempMask; //Write value back if no error on send
+    if(Error == 0x00) InterruptMask[PORT_A] = TempMask; //Write value back if no error on send
     Error = writeByte(LATCHA, TempLatch); //Write latch values back
-    if(Error == 0x00) InputLatch[A] = TempLatch; //Write values back if no error on send 
+    if(Error == 0x00) InputLatch[PORT_A] = TempLatch; //Write values back if no error on send 
   }
   return -1; //Fail is state is ill-defined
 }
