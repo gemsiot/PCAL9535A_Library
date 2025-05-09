@@ -29,8 +29,8 @@ Distributed as-is; no warranty is given.
 #define ON 1
 #define OFF 0
 
-#define A 0
-#define B 1
+#define PORT_A 0
+#define PORT_B 1
 // #define BOTH 2
 
 #define INPUT_PULLDOWN 3  //4th potential state of operation for IO expander pins
